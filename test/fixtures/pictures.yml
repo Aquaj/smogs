@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  alt_text: MyText
+  pages: one
+
+two:
+  alt_text: MyText
+  pages: two
