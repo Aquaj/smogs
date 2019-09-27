@@ -1,3 +1,18 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace :admin do
+    resources :stories do
+      resources :arcs do
+        resources :updates
+        resources :pages
+      end
+    end
+  end
+
+  resources :stories, param: :slug, only: [:index, :show] do
+    resources :pages, params: :position, only: [:index, :show]
+
+    resources :arcs, param: :slug, only: [:index, :show] do
+      resources :pages, params: :position, only: [:index, :show]
+    end
+  end
 end
