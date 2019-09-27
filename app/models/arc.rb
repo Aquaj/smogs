@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  name       :string
 #  position   :bigint
+#  url_slug   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  story_id   :bigint           not null
@@ -25,5 +26,6 @@ class Arc < ApplicationRecord
 
   has_one_attached :cover
 
-  validates_presence_of :position, :name
+  validates_presence_of :position, :name, :url_slug
+  validates_uniqueness_of :url_slug
 end

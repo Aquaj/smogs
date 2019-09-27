@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 2019_09_27_202428) do
   create_table "arcs", force: :cascade do |t|
     t.string "name"
     t.bigint "position"
+    t.string "url_slug"
     t.bigint "story_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -49,7 +50,6 @@ ActiveRecord::Schema.define(version: 2019_09_27_202428) do
     t.bigint "position"
     t.string "title"
     t.text "content"
-    t.string "url_slug"
     t.bigint "update_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -66,6 +66,7 @@ ActiveRecord::Schema.define(version: 2019_09_27_202428) do
 
   create_table "stories", force: :cascade do |t|
     t.string "name"
+    t.string "url_slug"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

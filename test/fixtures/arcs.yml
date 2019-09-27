@@ -5,6 +5,7 @@
 #  id         :bigint           not null, primary key
 #  name       :string
 #  position   :bigint
+#  url_slug   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  story_id   :bigint           not null

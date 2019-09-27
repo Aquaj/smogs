@@ -6,7 +6,6 @@
 #  content    :text
 #  position   :bigint
 #  title      :string
-#  url_slug   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  update_id  :bigint           not null
@@ -26,6 +25,5 @@ class Page < ApplicationRecord
   has_one :story, through: :arc
   has_many :pictures
 
-  validates_presence_of :title, :content, :position, :url_slug
-  validates_uniqueness_of :url_slug
+  validates_presence_of :title, :content, :position
 end

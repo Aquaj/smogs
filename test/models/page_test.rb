@@ -6,7 +6,6 @@
 #  content    :text
 #  position   :bigint
 #  title      :string
-#  url_slug   :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
 #  update_id  :bigint           not null
