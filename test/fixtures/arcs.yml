@@ -1,3 +1,23 @@
+# == Schema Information
+#
+# Table name: arcs
+#
+#  id         :bigint           not null, primary key
+#  name       :string
+#  position   :bigint
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  story_id   :bigint           not null
+#
+# Indexes
+#
+#  index_arcs_on_story_id  (story_id)
+#
+# Foreign Keys
+#
+#  fk_rails_...  (story_id => stories.id)
+#
+
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
