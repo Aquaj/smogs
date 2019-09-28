@@ -9,10 +9,10 @@ Rails.application.routes.draw do
   end
 
   resources :stories, param: :slug, only: [:index, :show] do
-    resources :pages, params: :position, only: [:index, :show]
+    resources :pages, params: :position, controller: 'story_pages', only: [:index, :show]
 
     resources :arcs, param: :slug, only: [:index, :show] do
-      resources :pages, params: :position, only: [:index, :show]
+      resources :pages, params: :position, controller: 'arc_pages', only: [:index, :show]
     end
   end
 end
