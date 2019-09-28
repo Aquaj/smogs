@@ -20,14 +20,13 @@
 #
 
 class Arc < ApplicationRecord
+  include Slugged, Covered
+
   belongs_to :story
   has_many :updates
   has_many :pages, through: :updates
 
-  has_one_attached :cover
-
-  validates_presence_of :position, :name, :url_slug
-  validates_uniqueness_of :url_slug
+  validates_presence_of :position, :name
 
   scope :published, -> { joins(:updates).merge(Update.published) }
 end

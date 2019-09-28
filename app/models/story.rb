@@ -10,14 +10,13 @@
 #
 
 class Story < ApplicationRecord
+  include Slugged, Covered
+
   has_many :arcs
   has_many :updates, through: :arcs
   has_many :pages, through: :updates
 
   has_one_attached :cover
-
-  validates_presence_of :name, :url_slug
-  validates_uniqueness_of :url_slug
 
   scope :published, -> { joins(:arcs).merge(Arc.published) }
 end
