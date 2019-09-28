@@ -21,4 +21,6 @@ class Update < ApplicationRecord
   belongs_to :arc
   has_one :story, through: :arc
   has_many :pages
+
+  scope :published, -> (at: DateTime.now) { where(arel_table[:published_at].gteq(at)) }
 end

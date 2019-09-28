@@ -18,4 +18,6 @@ class Story < ApplicationRecord
 
   validates_presence_of :name, :url_slug
   validates_uniqueness_of :url_slug
+
+  scope :published, -> { joins(:updates).merge(Update.published) }
 end
