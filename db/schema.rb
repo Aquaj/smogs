@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_27_202428) do
+ActiveRecord::Schema.define(version: 2019_09_28_194501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -47,10 +47,10 @@ ActiveRecord::Schema.define(version: 2019_09_27_202428) do
   end
 
   create_table "pages", force: :cascade do |t|
-    t.bigint "position"
+    t.bigint "publication_order"
     t.string "title"
     t.text "content"
-    t.bigint "publication_id", null: false
+    t.bigint "publication_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["publication_id"], name: "index_pages_on_publication_id"
@@ -84,4 +84,47 @@ ActiveRecord::Schema.define(version: 2019_09_27_202428) do
   add_foreign_key "pages", "publications"
   add_foreign_key "pictures", "pages"
   add_foreign_key "publications", "arcs"
+
+  create_view "page_positions", sql_definition: <<-SQL
+      SELECT row_number() OVER () AS id,
+      pages.id AS page_id,
+      publication_positions."position" AS publication_position,
+      publication_positions.publication_id,
+      (arc_positions."position" + publication_positions."position") AS arc_position,
+      arc_positions.arc_id,
+      ((story_positions."position" + arc_positions."position") + publication_positions."position") AS story_position,
+      story_positions.story_id
+     FROM (((pages
+       JOIN ( SELECT pages_1.id AS page_id,
+              pages_1.publication_order AS "position",
+              publications.id AS publication_id
+             FROM (pages pages_1
+               JOIN publications ON ((pages_1.publication_id = publications.id)))) publication_positions ON ((publication_positions.page_id = pages.id)))
+       JOIN ( SELECT pages_1.id AS page_id,
+              rolling_counts.previous_page_count AS "position",
+              arcs.id AS arc_id
+             FROM (((pages pages_1
+               JOIN publications ON ((pages_1.publication_id = publications.id)))
+               JOIN arcs ON ((publications.arc_id = arcs.id)))
+               JOIN ( SELECT publications_1.id AS publication_id,
+                      count(previous_pages.id) AS previous_page_count
+                     FROM ((publications publications_1
+                       LEFT JOIN publications previous_publications ON (((publications_1.arc_id = previous_publications.arc_id) AND (previous_publications.published_at < publications_1.published_at))))
+                       LEFT JOIN pages previous_pages ON ((previous_pages.publication_id = previous_publications.id)))
+                    GROUP BY publications_1.id) rolling_counts ON ((rolling_counts.publication_id = publications.id)))) arc_positions ON ((arc_positions.page_id = publication_positions.page_id)))
+       JOIN ( SELECT pages_1.id AS page_id,
+              COALESCE(rolling_counts.previous_page_count) AS "position",
+              stories.id AS story_id
+             FROM ((((pages pages_1
+               JOIN publications ON ((pages_1.publication_id = publications.id)))
+               JOIN arcs ON ((publications.arc_id = arcs.id)))
+               JOIN stories ON ((arcs.story_id = stories.id)))
+               LEFT JOIN ( SELECT arcs_1.id AS arc_id,
+                      count(previous_pages.id) AS previous_page_count
+                     FROM (((arcs arcs_1
+                       LEFT JOIN arcs previous_arcs ON (((arcs_1.story_id = previous_arcs.story_id) AND (previous_arcs."position" < arcs_1."position"))))
+                       LEFT JOIN publications previous_publications ON ((previous_publications.arc_id = previous_arcs.id)))
+                       LEFT JOIN pages previous_pages ON ((previous_pages.publication_id = previous_publications.id)))
+                    GROUP BY arcs_1.id) rolling_counts ON ((rolling_counts.arc_id = arcs.id)))) story_positions ON ((story_positions.page_id = arc_positions.page_id)));
+  SQL
 end

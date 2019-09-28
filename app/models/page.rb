@@ -2,13 +2,13 @@
 #
 # Table name: pages
 #
-#  id             :bigint           not null, primary key
-#  content        :text
-#  position       :bigint
-#  title          :string
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  publication_id :bigint           not null
+#  id                :bigint           not null, primary key
+#  content           :text
+#  publication_order :bigint
+#  title             :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  publication_id    :bigint
 #
 # Indexes
 #
@@ -25,5 +25,9 @@ class Page < ApplicationRecord
   has_one :story, through: :arc
   has_many :pictures
 
-  validates_presence_of :title, :content, :position
+  has_one :position, class_name: 'PagePosition'
+  default_scope -> { left_joins(:position).order(:story_position) }
+
+  validates_presence_of :title, :content
+  validates_presence_of :publication_order, if: :publication_id?
 end

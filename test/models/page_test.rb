@@ -2,13 +2,13 @@
 #
 # Table name: pages
 #
-#  id             :bigint           not null, primary key
-#  content        :text
-#  position       :bigint
-#  title          :string
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  publication_id :bigint           not null
+#  id                :bigint           not null, primary key
+#  content           :text
+#  publication_order :bigint
+#  title             :string
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  publication_id    :bigint
 #
 # Indexes
 #
