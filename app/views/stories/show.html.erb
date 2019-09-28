@@ -1,0 +1,7 @@
+<h1><%= @story.name %></h1>
+
+<ol>
+<%- @arcs.each do |arc| %>
+  <li><%= link_to arc.name, [@story, arc] %></li>
+<% end %>
+</ol>

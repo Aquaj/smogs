@@ -28,4 +28,6 @@ class Arc < ApplicationRecord
 
   validates_presence_of :position, :name, :url_slug
   validates_uniqueness_of :url_slug
+
+  scope :published, -> { joins(:updates).merge(Update.published) }
 end

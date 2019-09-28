@@ -5,6 +5,7 @@ class StoriesController < ApplicationController
 
   def show
     @story = scope.find(params[:id])
+    @arcs = @story.arcs.published
   end
 
   private
