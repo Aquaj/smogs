@@ -50,10 +50,10 @@ ActiveRecord::Schema.define(version: 2019_09_27_202428) do
     t.bigint "position"
     t.string "title"
     t.text "content"
-    t.bigint "update_id", null: false
+    t.bigint "publication_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["update_id"], name: "index_pages_on_update_id"
+    t.index ["publication_id"], name: "index_pages_on_publication_id"
   end
 
   create_table "pictures", force: :cascade do |t|
@@ -64,6 +64,14 @@ ActiveRecord::Schema.define(version: 2019_09_27_202428) do
     t.index ["page_id"], name: "index_pictures_on_page_id"
   end
 
+  create_table "publications", force: :cascade do |t|
+    t.datetime "published_at"
+    t.bigint "arc_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["arc_id"], name: "index_publications_on_arc_id"
+  end
+
   create_table "stories", force: :cascade do |t|
     t.string "name"
     t.string "url_slug"
@@ -71,17 +79,9 @@ ActiveRecord::Schema.define(version: 2019_09_27_202428) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "updates", force: :cascade do |t|
-    t.datetime "published_at"
-    t.bigint "arc_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["arc_id"], name: "index_updates_on_arc_id"
-  end
-
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "arcs", "stories"
-  add_foreign_key "pages", "updates"
+  add_foreign_key "pages", "publications"
   add_foreign_key "pictures", "pages"
-  add_foreign_key "updates", "arcs"
+  add_foreign_key "publications", "arcs"
 end

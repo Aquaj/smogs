@@ -13,7 +13,7 @@ class Story < ApplicationRecord
   include Slugged, Covered
 
   has_many :arcs
-  has_many :updates, through: :arcs
+  has_many :publications, through: :arcs
   has_many :pages, through: :updates
 
   has_one_attached :cover

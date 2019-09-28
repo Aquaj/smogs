@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: updates
+# Table name: publications
 #
 #  id           :bigint           not null, primary key
 #  published_at :datetime
@@ -10,14 +10,14 @@
 #
 # Indexes
 #
-#  index_updates_on_arc_id  (arc_id)
+#  index_publications_on_arc_id  (arc_id)
 #
 # Foreign Keys
 #
 #  fk_rails_...  (arc_id => arcs.id)
 #
 
-class Update < ApplicationRecord
+class Publication < ApplicationRecord
   belongs_to :arc
   has_one :story, through: :arc
   has_many :pages

@@ -23,10 +23,10 @@ class Arc < ApplicationRecord
   include Slugged, Covered
 
   belongs_to :story
-  has_many :updates
-  has_many :pages, through: :updates
+  has_many :publications
+  has_many :pages, through: :publications
 
   validates_presence_of :position, :name
 
-  scope :published, -> { joins(:updates).merge(Update.published) }
+  scope :published, -> { joins(:publications).merge(Publication.published) }
 end
