@@ -1,0 +1,8 @@
+<p id="notice"><%= notice %></p>
+
+Hallo. Time to login.
+
+<%= form_for :session, url: sessions_path(params: { redirect: @redirect_to }) do |f| %>
+  Password? <%= f.password_field :password %>
+  <%= f.submit 'Log in' %>
+<% end %>

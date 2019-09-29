@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :sessions, only: [:new, :create]
+
   namespace :admin do
     resources :stories do
       resources :arcs do
