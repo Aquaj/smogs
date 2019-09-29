@@ -24,7 +24,13 @@ class Arc < ApplicationRecord
 
   belongs_to :story
   has_many :publications
-  has_many :pages, through: :publications
+  has_many :pages, through: :publications do
+    def find_page(position)
+      PagePosition.where(page: self).find_by!(
+        arc_position: position,
+        arc_id: proxy_association.owner.id).page
+    end
+  end
 
   validates_presence_of :position, :name
 
