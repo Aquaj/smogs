@@ -22,5 +22,5 @@ class Publication < ApplicationRecord
   has_one :story, through: :arc
   has_many :pages
 
-  scope :published, -> (at: DateTime.now) { where(arel_table[:published_at].gteq(at)) }
+  scope :published, -> (at: DateTime.now) { where(arel_table[:published_at].lteq(at)) }
 end

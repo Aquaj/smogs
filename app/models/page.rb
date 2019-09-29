@@ -30,4 +30,6 @@ class Page < ApplicationRecord
 
   validates_presence_of :title, :content
   validates_presence_of :publication_order, if: :publication_id?
+
+  scope :published, -> { joins(:publication).merge(Publication.published) }
 end

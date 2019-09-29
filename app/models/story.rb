@@ -14,7 +14,13 @@ class Story < ApplicationRecord
 
   has_many :arcs
   has_many :publications, through: :arcs
-  has_many :pages, through: :updates
+  has_many :pages, through: :publications do
+    def find_page(position)
+      PagePosition.where(page: self).find_by!(
+        story_position: position,
+        story_id: proxy_association.owner.id).page
+    end
+  end
 
   has_one_attached :cover
 
