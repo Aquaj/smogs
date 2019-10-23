@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :pages, param: :position, only: [:show]
+
   resources :stories, param: :slug, only: [:index, :show] do
     resources :pages, params: :position, controller: 'story_pages', only: [:show]
 
