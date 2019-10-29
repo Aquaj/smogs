@@ -49,14 +49,15 @@
     grid-row: footer;
     grid-column: 3 / 4;
 
+    // Clamping
+    display: -webkit-box;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -moz-box-orient: vertical;-webkit-line-clamp: 2;
+
     margin: 0;
     width: 100%;
     align-self: center;
-
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-
   }
 
   &__selector {
