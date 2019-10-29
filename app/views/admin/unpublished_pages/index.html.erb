@@ -1,5 +1,14 @@
-<h2>Unpublished pages</h2>
+<%= form_tag admin_partial_updates_path, remote: true, 'data-controller': 'selection' do %>
+  <h2>Unpublished pages <span data-target="selection.count">There's {{count}} selected</span></h2>
+  <%= select_tag 'pages',
+                  options_from_collection_for_select(@pages, :id, :created_at),
+                  multiple: true, 'data-target': 'selection.selector' %>
+  <%= submit_tag "Create update", 'data-target': 'selection.submit' %>
 
-<div class="card-list">
-  <%= render partial: 'page_card', collection: @pages, as: :page %>
-</div>
+  <div class="card-list" >
+    <%= render partial: 'page_card',
+               collection: @pages,
+               as: :page,
+               locals: { selectable: true } %>
+  </div>
+<% end %>

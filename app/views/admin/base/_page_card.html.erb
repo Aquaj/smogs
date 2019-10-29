@@ -1,9 +1,17 @@
-<div class="page-card">
+<% selectable ||= false %>
+<%= content_tag :div, class: 'page-card' + (selectable ? ' page-card--selectable' : ''),
+                      data: { id: page.id,
+                              target: ('selection.selectable' if selectable),
+                              action: ('click->selection#toggleSelection' if selectable) } do %>
   <p class="page-card__publication-date"><%= icon_tag 'clock' %> DD/MM/YY</p>
 
   <img class="page-card__picture" src="<%= image_path 'comic-example.png' %>" />
 
-  <%= icon_tag 'align-justify', :regular, class: "page-card__description-indicator" %>
-  <p class="page-card__description">Lorem ipsum dolor sit amet</p>
+  <% if page.id % 3 == 0 %>
+    <%= icon_tag 'align-justify', :regular, class: "page-card__description-indicator" %>
+    <p class="page-card__description"><%= "Lorem ipsum dolor sit amet"  %></p>
+  <% else %>
+    <%= icon_tag 'align-slash', :regular, class: "page-card__description-indicator" %>
+  <% end %>
   <%= icon_tag 'check', :solid, class: "page-card__selector" %>
-</div>
+<% end %>

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :unpublished_pages, only: [:index]
     resources :page_uploads, only: [:create]
+    resources :partial_updates, only: [:create]
     resources :updates, only: [:create]
   end
 
