@@ -36,24 +36,28 @@ export default class extends Controller {
 
   updateCount() {
     if (this.hasCountTarget) {
-      const counter = this.countTarget;
       const count = this.selecteds().length;
-      var originalText;
 
-      if (count === 0) {
-        counter.style.display = 'none';
-      } else {
-        counter.style.display = null;
+      const counters = this.countTargets;
+      for (var i = 0; i < counters.length; i = i+1) {
+        var counter = counters[i];
+        var originalText;
+
+        if (count === 0) {
+          counter.style.display = 'none';
+        } else {
+          counter.style.display = null;
+        }
+
+        if ('originalText' in counter.dataset) {
+          originalText = counter.dataset['originalText'];
+        } else {
+          originalText = counter.innerText;
+          counter.dataset['originalText'] = originalText;
+        }
+
+        counter.innerText = originalText.replace(/{{count}}/g, count);
       }
-
-      if ('originalText' in counter.dataset) {
-        originalText = counter.dataset['originalText'];
-      } else {
-        originalText = counter.innerText;
-        counter.dataset['originalText'] = originalText;
-      }
-
-      counter.innerText = originalText.replace(/{{count}}/g, count);
     }
   }
 
