@@ -1,0 +1,88 @@
+.page-card {
+  --inner-margin-size: .5rem;
+  --selected-color: var(--accent-color, teal);
+
+  border: solid 2px black;
+  width: 20rem;
+  height: 20rem;
+  background: white;
+
+  display: grid;
+  grid-template-rows: 0 [header] auto [picture] auto [footer] auto 0;
+
+  grid-template-columns: var(--inner-margin-size)
+                         min-content auto min-content
+                         var(--inner-margin-size);
+
+  grid-row-gap: var(--inner-margin-size);
+
+
+  &__picture {
+    grid-row: picture;
+    grid-column: 1 / 6;
+
+    height: 100%;
+    width: 100%;
+
+    object-fit: cover;
+  }
+
+  &__publication-date {
+    grid-row: header;
+    grid-column: 2 / 5;
+
+    margin: 0;
+    align-self: start;
+    justify-self: start;
+  }
+
+  &__description-indicator {
+    grid-row: footer;
+    grid-column: 2 / 3;
+
+    --size: 2rem;
+    font-size: var(--size);
+    margin: calc(var(--size)/4);
+  }
+
+  &__description {
+    grid-row: footer;
+    grid-column: 3 / 4;
+
+    margin: 0;
+    width: 100%;
+    align-self: center;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+
+  }
+
+  &__selector {
+    grid-row: footer;
+    grid-column: 4 / 5;
+    display: none !important; // HACK: Override font-awesome's defaults
+
+    --size: 2rem;
+    width: var(--size);
+    height: var(--size);
+    line-height: var(--size) !important; // HACK: Override font-awesome's defaults
+    text-align: center;
+    font-size: calc(var(--size) * 0.8) ;
+    margin: calc(var(--size)/4);
+
+    color: var(--selected-color);
+    border: 3px solid var(--selected-color);
+    border-radius: 50%;
+  }
+
+  &--selected {
+    border: solid 4px var(--selected-color);
+
+    & .page-card__selector {
+      display: inline-block !important;
+    }
+  }
+}
+

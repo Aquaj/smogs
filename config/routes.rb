@@ -2,12 +2,9 @@ Rails.application.routes.draw do
   resources :sessions, only: [:new, :create]
 
   namespace :admin do
-    resources :stories do
-      resources :arcs do
-        resources :updates
-        resources :pages
-      end
-    end
+    resources :unpublished_pages, only: [:index]
+    resources :page_uploads, only: [:create]
+    resources :updates, only: [:create]
   end
 
   resources :pages, param: :position, only: [:show]

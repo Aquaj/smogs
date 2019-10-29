@@ -6,8 +6,9 @@ class ApplicationController < ActionController::Base
     respond_to do |format|
       format.json { render json: { errors: [message: "401 Not Authorized"] }, status: 401 }
       format.html do
-        alert "Not Authorized to access this page, please log in"
-        redirect_to new_session_path, redirect: request.original_url
+        session[LOGIN_KEY] = true
+        # alert "Not Authorized to access this page, please log in"
+        # redirect_to new_session_path, redirect: request.original_url
       end
       format.any { head 401 }
     end
