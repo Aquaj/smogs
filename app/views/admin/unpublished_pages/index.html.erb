@@ -1,6 +1,13 @@
 <h2>
   Unpublished pages
   <span data-target="interpolation.text">There's {{selection.count}} selected</span>
+  <%= submit_tag "Create update",
+                  'data-target': 'toggle.hide remote-event.source',
+                  'data-action': 'click->remote-event#transfer',
+                  'data-toggle-source': 'interpolation',
+                  'data-remote-click-id': 'publicationCreation',
+                  'data-remote-click-hide': true
+                %>
 </h2>
 <hr>
 <div class="card-list" data-controller="selection">
@@ -8,10 +15,13 @@
              collection: @pages,
              as: :page,
              locals: { selectable: true } %>
+
   <%= form_tag admin_partial_updates_path, remote: true do %>
     <%= select_tag 'pages',
                     options_from_collection_for_select(@pages, :id, :created_at),
                     multiple: true, 'data-target': 'selection.selector' %>
-    <%= submit_tag "Create update", 'data-target': 'toggle.hide', 'data-toggle-source': 'interpolation' %>
+    <%= submit_tag "Create update",
+                   'data-target': 'remote-event.destination',
+                   'data-remote-click-id': 'publicationCreation' %>
   <% end %>
 </div>
