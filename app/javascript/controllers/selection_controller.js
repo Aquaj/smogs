@@ -2,7 +2,7 @@ import { Controller } from "stimulus"
 import { interpolate, toggle } from "../central-dispatcher"
 
 export default class extends Controller {
-  static targets = ["submit", "count", "selectable", "selector"]
+  static targets = ["selectable", "selector"]
 
   connect() {
     this.selectorTarget.style.display = "none";
