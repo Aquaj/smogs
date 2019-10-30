@@ -1,18 +1,20 @@
 .layout--sidebar {
   --header-size: 10rem;
-  grid-template: 'logo       content' var(--header-size)
+  grid-template: 'logo       header' var(--header-size)
                  'navigation content'
                 / min-content auto;
 
   .layout {
     &__navigation {
       width: 10rem;
+
+      display: flex;
+      flex-direction: column;
+      padding: 1em 0;
     }
 
-    &__content {
-      display: grid;
-      grid-template-rows: var(--header-size) auto;
-      grid-template-rows: subgrid;
+    &__navigation-item {
+      width: 100%;
     }
   }
 }

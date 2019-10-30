@@ -17,11 +17,21 @@
     <main class="layout__content">
       <%= yield %>
     </main>
+    <header class="layout__header">
+      <% if content_for :header %>
+        <%= content_for :header %>
+      <% else %>
+        <h2>Sans titre ?</h2>
+      <% end %>
+    </header>
     <nav class="layout__navigation">
-      <a>Test 1</a>
-      <a>Test 2</a>
-      <a>Test 3</a>
-      <a>Test 4</a>
+      <a class="layout__navigation-item">Test 1</a>
+      <a class="layout__navigation-item">Test 2</a>
+      <a class="layout__navigation-item">Test 3</a>
+      <a class="layout__navigation-item">Test 4</a>
     </nav>
+    <div class="layout__logo">
+
+    </div>
   </body>
 </html>

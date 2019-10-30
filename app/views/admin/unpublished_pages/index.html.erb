@@ -1,15 +1,19 @@
-<h2>
-  Unpublished pages
-  <span data-target="interpolation.text">There's {{selection.count}} selected</span>
-  <%= submit_tag "Create update",
-                  'data-target': 'toggle.hide remote-event.source',
-                  'data-action': 'click->remote-event#transfer',
-                  'data-toggle-source': 'interpolation',
-                  'data-remote-click-id': 'publicationCreation',
-                  'data-remote-click-hide': true
-                %>
-</h2>
-<hr>
+<%= content_for :header do %>
+  <h2>
+    Unpublished pages
+  </h2>
+  <div>
+    <div data-target="interpolation.text">There's {{selection.count}} selected</div>
+    <%= submit_tag "Create update",
+                    'data-target': 'toggle.hide remote-event.source',
+                    'data-action': 'click->remote-event#transfer',
+                    'data-toggle-source': 'interpolation',
+                    'data-remote-click-id': 'publicationCreation',
+                    'data-remote-click-hide': true
+                  %>
+  </div>
+<% end %>
+
 <div class="card-list" data-controller="selection">
   <%= render partial: 'page_card',
              collection: @pages,

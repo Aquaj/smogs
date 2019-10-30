@@ -3,9 +3,37 @@
 
   &__content {
     grid-area: content;
+
+    padding: 1rem;
+  }
+
+  &__header {
+    grid-area: header;
+
+    display: flex;
+    align-items: center;
+    padding: 5rem;
+    justify-content: space-between;
   }
 
   &__navigation {
     grid-area: navigation;
+  }
+
+  &__navigation-item {
+    padding: 1rem 2rem;
+    color: var(--text-color);
+
+    &:hover {
+      background-color: var(--background-accent-color);
+    }
+  }
+
+  &__logo {
+    grid-area: logo;
+
+    margin: 1rem;
+    border-radius: 50%;
+    background: red;
   }
 }
