@@ -1,4 +1,5 @@
 import { Controller } from "stimulus"
+import interpolate from "../interpolation"
 
 export default class extends Controller {
   static targets = ["submit", "count", "selectable", "selector"]
@@ -15,14 +16,8 @@ export default class extends Controller {
     event.stopImmediatePropagation();
     const toggled = event.currentTarget;
 
-    const shouldBeSelected = !toggled.classList.contains('selected')
-    if (shouldBeSelected) {
-      this.matchingSelectorOption(toggled).selected = true;
-      this.selectVisually(toggled);
-    } else {
-      this.matchingSelectorOption(toggled).selected = false;
-      this.deselectVisually(toggled);
-    }
+    this.changeSelectionState(toggled)
+
     this.updateCount();
     this.showOrHideSubmitButton();
   }
@@ -35,30 +30,13 @@ export default class extends Controller {
   }
 
   updateCount() {
-    if (this.hasCountTarget) {
-      const count = this.selecteds().length;
-
-      const counters = this.countTargets;
-      for (var i = 0; i < counters.length; i = i+1) {
-        var counter = counters[i];
-        var originalText;
-
-        if (count === 0) {
-          counter.style.display = 'none';
-        } else {
-          counter.style.display = null;
-        }
-
-        if ('originalText' in counter.dataset) {
-          originalText = counter.dataset['originalText'];
-        } else {
-          originalText = counter.innerText;
-          counter.dataset['originalText'] = originalText;
-        }
-
-        counter.innerText = originalText.replace(/{{count}}/g, count);
-      }
-    }
+    const count = this.selecteds().length;
+    interpolate({
+      "source": "selection",
+      "type": "count",
+      "value": (count === 0 ? null : count),
+      "whenEmpty": "hide"
+    })
   }
 
   selectPreselectedOptions() {
@@ -67,18 +45,23 @@ export default class extends Controller {
     for (var i = 0; i < selector.children.length; i = i + 1) {
       const option = selector.children[i];
 
-      if (option.selected) {
-        this.selectVisually(this.matchingSelectable(option)) ;
-      }
+      this.changeSelectionState(this.matchingSelectable(option), option.selected) ;
     }
   }
 
-  selectVisually(selectable) {
-    selectable.classList.add('selected')
+  changeSelectionState(selectable, newState = null) {
+    // When newState is not specified, flip to other
+    if (newState === null) { newState = !this.isSelected(selectable) }
+    this.matchingSelectorOption(selectable).selected = newState;
+    this.toggleVisualSelection(selectable, newState);
   }
 
-  deselectVisually(selectable) {
-    selectable.classList.remove('selected')
+  toggleVisualSelection(selectable, newState) {
+    selectable.classList.toggle('selected', newState)
+  }
+
+  isSelected(selectable) {
+    return selectable.classList.contains('selected')
   }
 
   selecteds() {
@@ -99,9 +82,7 @@ export default class extends Controller {
 
     for(var i = 0; i < selectables.length; i = i + 1) {
       const selectable = selectables[i]
-      if (selectable.dataset['id'] == selectorOption.value) {
-        return selectable;
-      }
+      if (selectable.dataset['id'] == selectorOption.value) { return selectable; }
     }
     return null;
   }
@@ -111,9 +92,7 @@ export default class extends Controller {
 
     for (var i = 0; i < selector.children.length; i = i + 1) {
       const option = selector.children[i];
-      if (selectable.dataset['id'] == option.value) {
-        return option;
-      }
+      if (selectable.dataset['id'] == option.value) { return option; }
     }
     return null;
   }

@@ -1,8 +1,10 @@
 .card-list {
+  --card-size: 15rem;
+
   padding: 0 5rem;
 
   display: grid;
   grid-gap: 2rem;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(auto-fill, var(--card-size));
   justify-content: space-evenly;
 }

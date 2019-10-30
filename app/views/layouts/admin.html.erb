@@ -10,7 +10,17 @@
     <script src="https://kit.fontawesome.com/fa8f5ac4cb.js" crossorigin="anonymous"></script>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="layout layout--sidebar"
+        data-controller="interpolation"
+        data-action="interpolation-needed->interpolation#interpolate">
+    <main class="layout__content">
+      <%= yield %>
+    </main>
+    <nav class="layout__navigation">
+      <a>Test 1</a>
+      <a>Test 2</a>
+      <a>Test 3</a>
+      <a>Test 4</a>
+    </nav>
   </body>
 </html>

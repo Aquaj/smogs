@@ -1,0 +1,18 @@
+.layout--sidebar {
+  --header-size: 10rem;
+  grid-template: 'logo       content' var(--header-size)
+                 'navigation content'
+                / min-content auto;
+
+  .layout {
+    &__navigation {
+      width: 10rem;
+    }
+
+    &__content {
+      display: grid;
+      grid-template-rows: var(--header-size) auto;
+      grid-template-rows: subgrid;
+    }
+  }
+}
