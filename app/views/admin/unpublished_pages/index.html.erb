@@ -12,6 +12,6 @@
     <%= select_tag 'pages',
                     options_from_collection_for_select(@pages, :id, :created_at),
                     multiple: true, 'data-target': 'selection.selector' %>
-    <%= submit_tag "Create update", 'data-target': 'selection.submit' %>
+    <%= submit_tag "Create update", 'data-target': 'toggle.hide', 'data-toggle-source': 'interpolation' %>
   <% end %>
 </div>

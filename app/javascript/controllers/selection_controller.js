@@ -1,5 +1,5 @@
 import { Controller } from "stimulus"
-import interpolate from "../interpolation"
+import { interpolate, toggle } from "../central-dispatcher"
 
 export default class extends Controller {
   static targets = ["submit", "count", "selectable", "selector"]
@@ -23,10 +23,9 @@ export default class extends Controller {
   }
 
   showOrHideSubmitButton() {
-    const selector = this.selectorTarget;
-    var anySelected = this.selecteds().length !== 0
+    const anySelected = this.selecteds().length !== 0
 
-    this.submitTarget.style.display = (anySelected ? 'block' : 'none')
+    toggle.hide('interpolation', !anySelected)
   }
 
   updateCount() {

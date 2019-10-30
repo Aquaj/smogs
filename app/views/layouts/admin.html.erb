@@ -11,8 +11,9 @@
   </head>
 
   <body class="layout layout--sidebar"
-        data-controller="interpolation"
-        data-action="interpolation-needed->interpolation#interpolate">
+        data-controller="interpolation toggle"
+        data-action="interpolation-needed->interpolation#interpolate
+                     toggle-hide->toggle#hide">
     <main class="layout__content">
       <%= yield %>
     </main>
