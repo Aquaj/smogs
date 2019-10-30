@@ -24,6 +24,7 @@
     height: 100%;
     width: 100%;
 
+    user-select: none;
     object-fit: cover;
   }
 
@@ -41,6 +42,7 @@
     grid-column: 2 / 3;
 
     --size: 2rem;
+    height: var(--size);
     font-size: var(--size);
     margin: calc(var(--size)/4);
   }
