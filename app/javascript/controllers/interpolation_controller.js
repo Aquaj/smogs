@@ -37,26 +37,5 @@ export default class extends Controller {
 
       text.innerText = originalText.replace(regexp, info.value);
     }
-    // if (this.hasCountTarget) {
-    //   const counters = this.countTargets;
-    //   for (var i = 0; i < counters.length; i = i+1) {
-    //     var counter = counters[i];
-
-    //     if (count === 0) {
-    //       counter.style.display = 'none';
-    //     } else {
-    //       counter.style.display = null;
-    //     }
-
-    //     if ('originalText' in counter.dataset) {
-    //       originalText = counter.dataset['originalText'];
-    //     } else {
-    //       originalText = counter.innerText;
-    //       counter.dataset['originalText'] = originalText;
-    //     }
-
-    //     counter.innerText = originalText.replace(/{{count}}/g, count);
-    //   }
-    // }
   }
 }
