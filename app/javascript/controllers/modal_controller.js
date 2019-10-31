@@ -1,5 +1,5 @@
 import { Controller } from 'stimulus';
-import { scroll } from 'central-dispatcher';
+import { scroll } from 'toolbox';
 
 export default class extends Controller {
   connect() {

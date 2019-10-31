@@ -1,5 +1,5 @@
 import { Controller } from "stimulus"
-import { interpolate, toggle } from "../central-dispatcher"
+import { interpolate, toggle } from "toolbox"
 
 export default class extends Controller {
   static targets = ["selectable", "selector"]
