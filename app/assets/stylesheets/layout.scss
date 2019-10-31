@@ -1,6 +1,8 @@
 .layout {
   display: grid;
 
+  background-color: var(--background-color);;
+
   &__content {
     grid-area: content;
 
@@ -25,7 +27,7 @@
     color: var(--text-color);
 
     &:hover {
-      background-color: var(--background-accent-color);
+      background-color: var(--accented-background-color);
     }
   }
 

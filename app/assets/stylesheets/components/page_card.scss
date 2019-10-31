@@ -6,7 +6,9 @@
   border: solid 4px black;
   width: var(--size);
   height: var(--size);
-  background: white;
+  background: var(--light-background-color);
+
+  color: var(--dark-text-color);
 
   display: grid;
   grid-template-rows: 0 [header] auto [picture] auto [footer] auto 0;

@@ -1,0 +1,14 @@
+html {
+  --dark-text-color: black;
+  --light-text-color: white;
+  --text-color: var(--light-text-color);
+
+  --dark-background-color: #3c4245;
+  --light-background-color: white;
+  --background-color: var(--dark-background-color);
+
+  --accented-background-color: #5f6769;
+  --accent-color: #719192;
+
+  color: var(--text-color);
+}
