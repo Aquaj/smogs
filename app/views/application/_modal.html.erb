@@ -1,0 +1,21 @@
+<% content ||= "" %>
+<% hard_close ||= true %>
+
+<div class="modal" data-controller="modal">
+  <div class="modal__body">
+    <div class="modal__title"> <%= header %> </div>
+    <div class="modal__content"> <%= raw(content) %> </div>
+
+    <a class="modal__open"
+       data-action="click->modal#open"
+       data-target="remote-event.destination"
+       data-remote-click-id="modalOpen">Open</a>
+    <% if hard_close %>
+      <a class="modal__close"
+         data-action="click->modal#hardClose">Close</a>
+    <% else %>
+      <a class="modal__close"
+         data-action="click->modal#softClose">Close</a>
+    <% end %>
+  </div>
+</div>
