@@ -6,20 +6,20 @@ export default class extends Controller {
   connect() {
     for (var i = 0; i < this.destinationTargets.length; i = i + 1) {
       var destination = this.destinationTargets[i];
-      var destinationId = destination.dataset['remoteClickId'];
+      var destinationId = destination.dataset['eventForwarderId'];
 
       var coherenceChecker = new Set();
       var matchingSources = this.matchingSources(destination)
       for (var j = 0; j < matchingSources.length; j = j + 1) {
         var source = matchingSources[j];
-        var hide = source.dataset['remoteClickHide'] === 'true';
+        var hide = source.dataset['eventForwarderHide'] === 'true';
 
         destination.style.display = (hide ? 'none' : null)
         coherenceChecker.add(hide);
       }
 
       if (coherenceChecker.size > 1) {
-        throw "Conflictual data-remote-click-hide instructions for data-remote-click-id: '" + destinationId +"'."
+        throw "Conflictual data-event-forwarder-hide instructions for data-event-forwarder-id: '" + destinationId +"'."
       };
     }
   }
@@ -35,13 +35,13 @@ export default class extends Controller {
 
   matchingDestinations(source) {
     return this.destinationTargets.filter(function(destination) {
-        return destination.dataset['remoteClickId'] === source.dataset['remoteClickId']
+        return destination.dataset['eventForwarderId'] === source.dataset['eventForwarderId']
     })
   }
 
   matchingSources(destination) {
     return this.sourceTargets.filter(function(source) {
-        return source.dataset['remoteClickId'] === destination.dataset['remoteClickId']
+        return source.dataset['eventForwarderId'] === destination.dataset['eventForwarderId']
     })
   }
 }

@@ -5,11 +5,11 @@
   <div>
     <div data-target="interpolation.text">There's {{selection.count}} selected</div>
     <%= submit_tag "Create update",
-                    'data-target': 'toggle.hide remote-event.source',
-                    'data-action': 'click->remote-event#transfer',
+                    'data-target': 'toggle.hide event-forwarder.source',
+                    'data-action': 'click->event-forwarder#transfer',
                     'data-toggle-source': 'interpolation',
-                    'data-remote-click-id': 'publicationCreation',
-                    'data-remote-click-hide': true
+                    'data-event-forwarder-id': 'publicationCreation',
+                    'data-event-forwarder-hide': true
                   %>
   </div>
 <% end %>
@@ -25,7 +25,7 @@
                     options_from_collection_for_select(@pages, :id, :created_at),
                     multiple: true, 'data-target': 'selection.selector' %>
     <%= submit_tag "Create update",
-                   'data-target': 'remote-event.destination',
-                   'data-remote-click-id': 'publicationCreation' %>
+                   'data-target': 'event-forwarder.destination',
+                   'data-event-forwarder-id': 'publicationCreation' %>
   <% end %>
 </div>
