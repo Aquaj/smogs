@@ -18,11 +18,7 @@
       <%= yield %>
     </main>
     <header class="layout__header">
-      <% if content_for :header %>
-        <%= content_for :header %>
-      <% else %>
-        <h2>Sans titre ?</h2>
-      <% end %>
+      <%= header %>
     </header>
     <nav class="layout__navigation">
       <a class="layout__navigation-item">Test 1</a>

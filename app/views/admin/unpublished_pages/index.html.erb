@@ -1,4 +1,4 @@
-<%= content_for :header do %>
+<%= header do %>
   <h2>
     Unpublished pages
   </h2>
@@ -20,8 +20,8 @@
              as: :page,
              locals: { selectable: true } %>
 
-  <%= form_tag admin_partial_updates_path, remote: true do %>
-    <%= select_tag 'pages',
+  <%= form_tag admin_partial_publications_path, remote: true do %>
+    <%= select_tag 'page_ids',
                     options_from_collection_for_select(@pages, :id, :created_at),
                     multiple: true, 'data-target': 'selection.selector' %>
     <%= submit_tag "Create update",
