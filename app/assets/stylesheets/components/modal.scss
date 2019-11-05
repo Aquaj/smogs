@@ -20,19 +20,55 @@
 
     width: 80vw;
     height: 75vh;
-    padding: 2rem;
+
+    display: grid;
+    grid-template: 'title   title   close-symbol' min-content
+                   'content content content' auto
+                   / auto   auto    min-content;
+
+    padding: 1rem;
+    padding-bottom: 2rem;
     border-radius: 1rem;
+    grid-gap: 1.5rem;
+
+    align-items: center;
   }
 
   &__title {
+    grid-area: title;
+    font-size: 1.2rem;
+
+     // We're handling positioning ourselves here, thank you.
+     //IDEA: Do this globally in a reset css file ?
+     & > h1, & > h2, & > h3, & > h4 {
+       margin: 0;
+     }
   }
 
   &__content {
+    grid-area: content;
+    align-self: flex-start;
+
+    height: 100%;
+    overflow: auto;
+    box-sizing: border-box;
   }
 
-  &__close {
+  &__close-symbol {
+    grid-area: close-symbol;
+
+    cursor: pointer;
+
+    font-size: 3rem;
+    line-height: 1;
+  }
+
+  &__close-text {
+    grid-area: close-text;
+    display: none;
   }
 
   &__open {
+    display: none;
   }
 }

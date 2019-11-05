@@ -3,19 +3,19 @@
 
 <div class="modal" data-controller="modal">
   <div class="modal__body">
-    <div class="modal__title"> <%= header %> </div>
-    <div class="modal__content"> <%= raw(content) %> </div>
+    <div class="modal__title"><%= header %></div>
+    <div class="modal__content"><%= raw(content) %></div>
 
     <a class="modal__open"
        data-action="click->modal#open"
        data-target="event-forwarder.destination"
        data-event-forwarder-id="modalOpen">Open</a>
-    <% if hard_close %>
-      <a class="modal__close"
-         data-action="click->modal#hardClose">Close</a>
-    <% else %>
-      <a class="modal__close"
-         data-action="click->modal#softClose">Close</a>
-    <% end %>
+    <% close_method = hard_close ? "hardClose" : "softClose" %>
+    <a class="modal__close-text"
+       data-action="click->modal#<%= close_method %>">Close</a>
+    <%= icon_tag 'times-circle',
+                 :regular,
+                 class: "modal__close-symbol",
+                 'data-action': "click->modal##{close_method}" %>
   </div>
 </div>
