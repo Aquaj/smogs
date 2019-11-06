@@ -3,15 +3,17 @@
                       data: { id: page.id,
                               target: ('selection.selectable' if selectable),
                               action: ('click->selection#toggleSelection' if selectable) } do %>
-  <p class="page-card__publication-date"><%= icon_tag 'clock' %> DD/MM/YY</p>
 
-  <img class="page-card__picture" src="<%= image_path 'comic-example.png' %>" />
+  <p class="page-card__publication-date"><%= icon_tag 'clock' %> <%= page.created_at.to_s(:standard) %></p>
 
-  <% if page.id % 3 == 0 %>
+  <img class="page-card__picture" src="<%= image_path page.image.path %>" />
+
+  <% if page.description.present? %>
     <%= icon_tag 'align-justify', :regular, class: "page-card__description-indicator" %>
-    <p class="page-card__description"><%= "Lorem ipsum dolor sit amet" %></p>
+    <p class="page-card__description"><%= page.description %></p>
   <% else %>
     <%= icon_tag 'align-slash', :regular, class: "page-card__description-indicator" %>
   <% end %>
+
   <%= icon_tag 'check', :solid, class: "page-card__selector" %>
 <% end %>

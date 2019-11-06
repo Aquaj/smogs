@@ -1,7 +1,7 @@
 <div>
   <ul>
     <% @publication.pages.each do |page| %>
-      <li><%= page.title %></li>
+      <li><%= page.created_at.to_s(:standard) %></li>
     <% end %>
   </ul>
 </div>
