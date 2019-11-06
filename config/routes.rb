@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     resources :unpublished_pages, only: [:index]
     resources :page_uploads, only: [:create]
     resources :partial_publications, only: [:create]
-    resources :updates, only: [:create]
+    resources :publications, only: [:create]
   end
 
   resources :pages, param: :position, only: [:show]
