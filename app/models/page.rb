@@ -25,11 +25,16 @@ class Page < ApplicationRecord
   has_one :story, through: :arc
   has_many :pictures
 
+  has_one_attached :image
+  validates :image, attached: true, content_type: /\Aimage\/.*\z/
+
   has_one :position, class_name: 'PagePosition'
   default_scope -> { left_joins(:position).order(:story_position) }
 
   validates_presence_of :title, :content
   validates_presence_of :publication_order, if: :publication_id?
 
+  scope :unpublished, -> { left_joins(:publication).where(publication: nil) }
   scope :published, -> { joins(:publication).merge(Publication.published) }
+  scope :awaiting_publication, -> { where.not(id: Page.published).where.not(publication: nil) }
 end

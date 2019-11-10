@@ -6,11 +6,11 @@
 
   <p class="page-card__publication-date"><%= icon_tag 'clock' %> <%= page.created_at.to_s(:standard) %></p>
 
-  <img class="page-card__picture" src="<%= image_path page.image.path %>" />
+  <%= image_tag page.image, class: "page-card__picture" %>
 
-  <% if page.description.present? %>
+  <% if page.content.present? %>
     <%= icon_tag 'align-justify', :regular, class: "page-card__description-indicator" %>
-    <p class="page-card__description"><%= page.description %></p>
+    <p class="page-card__description"><%= page.content %></p>
   <% else %>
     <%= icon_tag 'align-slash', :regular, class: "page-card__description-indicator" %>
   <% end %>
